@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HelperMethods</name>
+    </assembly>
+    <members>
+        <member name="T:HelperMethods.HelperMethods">
+            <summary>
+            Methods that will likely be reused over and over again.
+            </summary>
+        </member>
+        <member name="M:HelperMethods.HelperMethods.DisplayWelcomeScreen(System.String)">
+            <summary>
+            A welcome screen for an application that takes one argument,
+            a string that says what the application does.
+            </summary>
+            <param name="whatTheProgramDoes"></param>
+        </member>
+        <member name="M:HelperMethods.HelperMethods.DisplayContinueScreen">
+            <summary>
+            Parameterless continue screen.
+            </summary>
+        </member>
+        <member name="M:HelperMethods.HelperMethods.DisplayExitScreen">
+            <summary>
+            Parameterless exit screen.
+            </summary>
+        </member>
+        <member name="M:HelperMethods.HelperMethods.GetIntegerFromUser(System.String,System.Int32,System.Int32)">
+            <summary>
+            Method that returns an integer to the calling method, which it got from the user.
+            Takes three arguments: a prompt, a minimum value, and a maximum value.
+            </summary>
+            <param name="prompt">Customizable prompt for the user to enter an integer.</param>
+            <param name="minValue"></param>
+            <param name="maxValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperMethods.HelperMethods.GetIntegerFromUserLimitedAttempts(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            A method that returns an integer to the calling method, obtained from the user, if the user gave a properly formed response (an integer) within the 
+            number of attempts specified as an argument, or null otherwise. 
+            </summary>
+            <param name="prompt">A customizable prompt for the user to enter an integer.</param>
+            <param name="minValue"></param>
+            <param name="maxValue"></param>
+            <param name="numberOfAttempts">The number of chances the user will have to enter an integer before the method returns null to the calling method.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
