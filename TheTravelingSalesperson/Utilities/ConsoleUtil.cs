@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace CodingActivity_TheTravelingSalesperson
+namespace TheTravelingSalesperson
 {
     /// <summary>
     /// console utility class
@@ -18,7 +18,7 @@ namespace CodingActivity_TheTravelingSalesperson
         private static int _windowLeft = 20;
         private static int _windowTop = 20;
 
-        private static string _headerText = "- set header text -";
+        private static string _headerText = "- Hello World! -";
 
         private static ConsoleColor _headerBackgroundColor = ConsoleColor.White;
         private static ConsoleColor _headerForegroundColor = ConsoleColor.Red;
