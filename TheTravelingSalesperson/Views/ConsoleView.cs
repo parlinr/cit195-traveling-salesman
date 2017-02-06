@@ -75,11 +75,111 @@ namespace TheTravelingSalesperson
             _salesperson.FirstName = Console.ReadLine();
             Console.WriteLine();
 
+            ConsoleUtil.DisplayPromptMessage("Enter your last name: ");
+            _salesperson.LastName = Console.ReadLine();
+            Console.WriteLine();
+
+            ConsoleUtil.DisplayPromptMessage("Enter your account number: ");
+            _salesperson.AccountNumber = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+
             //
             // TODO prompt the user to input all of the required account information
             //
 
             DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// get the menu choice from the user
+        /// </summary>
+        public MenuOption DisplayGetUserMenuChoice()
+        {
+            MenuOption userMenuChoice = MenuOption.None;
+            bool usingMenu = true;
+
+            //
+            // TODO enable each application function separately and test
+            //
+            while (usingMenu)
+            {
+                //
+                // set up display area
+                //
+                ConsoleUtil.DisplayReset();
+                Console.CursorVisible = false;
+
+                //
+                // display the menu
+                //
+                ConsoleUtil.DisplayMessage("Please type the number of your menu choice.");
+                Console.WriteLine();
+                Console.WriteLine(
+                    "\t" + "5. Travel" + Environment.NewLine + 
+                    "\t" + "6. Display Account Info" + Environment.NewLine +
+                    "\t" + "E. Exit" + Environment.NewLine);
+
+                //
+                // get and process the user's response
+                // note: ReadKey argument set to "true" disables the echoing of the key press
+                //
+                ConsoleKeyInfo userResponse = Console.ReadKey(true);
+                switch (userResponse.KeyChar)
+                {
+                    case '5':
+                        userMenuChoice = MenuOption.Travel;
+                        usingMenu = false;
+                        break;
+                    case '6':
+                        userMenuChoice = MenuOption.DisplayAccountInfo;
+                        usingMenu = false;
+                        break;
+                    case 'E':
+                    case 'e':
+                        userMenuChoice = MenuOption.Exit;
+                        usingMenu = false;
+                        break;
+                    default:
+                        //
+                        // TODO handle invalid menu responses from user
+                        //
+                        break;
+                }
+            }
+            Console.CursorVisible = true;
+
+            return userMenuChoice;
+        }
+
+        /// <summary>
+        /// display the current account information
+        /// </summary>
+        public void DisplayAccountInfo()
+        {
+            ConsoleUtil.HeaderText = "Account Info";
+            ConsoleUtil.DisplayReset();
+
+            ConsoleUtil.DisplayMessage("First Name: " + _salesperson.FirstName);
+            ConsoleUtil.DisplayMessage("Last Name: " + _salesperson.LastName);
+            ConsoleUtil.DisplayMessage("Account Number: " + _salesperson.AccountNumber);
+             
+
+            DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// get the next city to travel to from the user
+        /// </summary>
+        /// <returns>string City</returns>
+        public string DisplayGetNextCity()
+        {
+            string nextCity = "";
+            
+
+            ConsoleUtil.HeaderText = "Next City of Travel";
+            ConsoleUtil.DisplayReset();
+
+            return nextCity;
         }
 
         #endregion

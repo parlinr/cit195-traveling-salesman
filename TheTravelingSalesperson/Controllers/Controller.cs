@@ -24,11 +24,49 @@ namespace TheTravelingSalesperson
         /// </summary>
         private void ManageApplicationLoop()
         {
+            bool _usingApplication = true;
+
+            MenuOption userMenuChoice;
             //show welcome screen
             _consoleView.DisplayWelcomeScreen();
 
             //setup account
             _consoleView.DisplaySetupAccount();
+
+            //main menu
+            while(_usingApplication)
+            {
+                userMenuChoice = _consoleView.DisplayGetUserMenuChoice();
+
+                switch (userMenuChoice)
+                {
+                    /*
+                    case MenuOption.None:
+                        break;
+                    */
+                    case MenuOption.Travel:
+                        string nextCity = _consoleView.DisplayGetNextCity();
+                        _salesperson.CitiesVisited.Add(nextCity);
+                        break;
+                    case MenuOption.Buy:
+                        break;
+                    case MenuOption.Sell:
+                        break;
+                    case MenuOption.DisplayInventory:
+                        break;
+                    case MenuOption.DisplayCities:
+                        break;
+                    case MenuOption.DisplayAccountInfo:
+                        _consoleView.DisplayAccountInfo();
+                        break;
+                    case MenuOption.Exit:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+
         }
 
 

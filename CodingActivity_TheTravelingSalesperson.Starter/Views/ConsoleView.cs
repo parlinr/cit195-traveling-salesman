@@ -201,7 +201,7 @@ namespace CodingActivity_TheTravelingSalesperson
         public string DisplayGetNextCity()
         {
             string nextCity = "";
-
+            
             ConsoleUtil.HeaderText = "Next City of Travel";
             ConsoleUtil.DisplayReset();
 
