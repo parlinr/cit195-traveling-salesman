@@ -176,10 +176,22 @@ namespace TheTravelingSalesperson
             string nextCity = "";
             
 
-            ConsoleUtil.HeaderText = "Next City of Travel";
+            ConsoleUtil.DisplayMessage("Next City of Travel: ");
+            nextCity = Console.ReadLine();
             ConsoleUtil.DisplayReset();
 
             return nextCity;
+        }
+
+        public void DisplayCities()
+        {
+            ConsoleUtil.DisplayMessage($"Current City: {_salesperson.CurrentCity}");
+
+            ConsoleUtil.DisplayMessage($"List of cities visited:");
+            foreach (string city in _salesperson.CitiesVisited)
+            {
+                ConsoleUtil.DisplayMessage(city);
+            }
         }
 
         #endregion

@@ -46,7 +46,11 @@ namespace TheTravelingSalesperson
                     */
                     case MenuOption.Travel:
                         string nextCity = _consoleView.DisplayGetNextCity();
-                        _salesperson.CitiesVisited.Add(nextCity);
+                        if (!_salesperson.CitiesVisited.Contains(nextCity))
+                        {
+                            _salesperson.CitiesVisited.Add(nextCity);
+                        }
+                        _salesperson.CurrentCity = nextCity;
                         break;
                     case MenuOption.Buy:
                         break;
@@ -55,6 +59,7 @@ namespace TheTravelingSalesperson
                     case MenuOption.DisplayInventory:
                         break;
                     case MenuOption.DisplayCities:
+                        _consoleView.DisplayCities();
                         break;
                     case MenuOption.DisplayAccountInfo:
                         _consoleView.DisplayAccountInfo();

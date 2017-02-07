@@ -14,7 +14,7 @@ namespace TheTravelingSalesperson
         private string _firstName;
         private int _accountNumber;
         private List<string> _citiesVisited;
-        //private string _currentCity;
+        private string _currentCity;
 
         
         #endregion
@@ -41,13 +41,13 @@ namespace TheTravelingSalesperson
             get { return _citiesVisited; }
             set { _citiesVisited = value; }
         }
-        /*
+        
         public string CurrentCity
         {
             get { return _currentCity; }
             set { _currentCity = value; }
         }
-        */
+        
 
         #endregion
 
@@ -59,7 +59,7 @@ namespace TheTravelingSalesperson
 
         public Salesperson()
         {
-
+            CitiesVisited = new List<string>();
         }
 
         #endregion
