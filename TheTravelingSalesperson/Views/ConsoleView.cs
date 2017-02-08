@@ -83,6 +83,15 @@ namespace TheTravelingSalesperson
             _salesperson.AccountNumber = int.Parse(Console.ReadLine());
             Console.WriteLine();
 
+            ConsoleUtil.DisplayPromptMessage("Enter the type of widget you will be selling: ");
+            string userResponse = Console.ReadLine();
+            _salesperson.CurrentStock.Type = (WidgetItemStock.WidgetType)Enum.Parse(typeof(WidgetItemStock.WidgetType), userResponse, true);
+            Console.WriteLine();
+
+            ConsoleUtil.DisplayPromptMessage("Enter the number of widgets: ");
+            _salesperson.AddWidgets(int.Parse(Console.ReadLine()));
+            Console.WriteLine();
+
             //
             // TODO prompt the user to input all of the required account information
             //
@@ -115,6 +124,9 @@ namespace TheTravelingSalesperson
                 ConsoleUtil.DisplayMessage("Please type the number of your menu choice.");
                 Console.WriteLine();
                 Console.WriteLine(
+                     "\t" + "2. Add Widgets" + Environment.NewLine +
+                    "\t" + "3. Display Inventory" + Environment.NewLine +
+                    "\t" + "4. Display Cities Visited and Current City" + Environment.NewLine +
                     "\t" + "5. Travel" + Environment.NewLine + 
                     "\t" + "6. Display Account Info" + Environment.NewLine +
                     "\t" + "E. Exit" + Environment.NewLine);
@@ -126,6 +138,18 @@ namespace TheTravelingSalesperson
                 ConsoleKeyInfo userResponse = Console.ReadKey(true);
                 switch (userResponse.KeyChar)
                 {
+                    case '2':
+                        userMenuChoice = MenuOption.Buy;
+                        usingMenu = false;
+                        break;
+                    case '3':
+                        userMenuChoice = MenuOption.DisplayInventory;
+                        usingMenu = false;
+                        break;
+                    case '4':
+                        userMenuChoice = MenuOption.DisplayCities;
+                        usingMenu = false;
+                        break;
                     case '5':
                         userMenuChoice = MenuOption.Travel;
                         usingMenu = false;
@@ -179,7 +203,7 @@ namespace TheTravelingSalesperson
             ConsoleUtil.DisplayMessage("Next City of Travel: ");
             nextCity = Console.ReadLine();
             ConsoleUtil.DisplayReset();
-
+            DisplayContinuePrompt();
             return nextCity;
         }
 
@@ -192,6 +216,53 @@ namespace TheTravelingSalesperson
             {
                 ConsoleUtil.DisplayMessage(city);
             }
+            
+            DisplayContinuePrompt();
+            ConsoleUtil.DisplayReset();
+        }
+
+        /// <summary>
+        /// display the Exit prompt on a clean screen
+        /// </summary>
+        public void DisplayExitPrompt()
+        {
+            ConsoleUtil.DisplayReset();
+
+            Console.CursorVisible = false;
+
+            Console.WriteLine();
+            ConsoleUtil.DisplayMessage("Thank you for using the application. Press any key to Exit.");
+
+            Console.ReadKey();
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void DisplayInventory()
+        {
+            ConsoleUtil.DisplayReset();
+            ConsoleUtil.DisplayMessage($"Widget type: {_salesperson.CurrentStock}");
+            ConsoleUtil.DisplayMessage($"Widget type: {_salesperson.NumberOfUnits}");
+            DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// get the number of widget units to buy from the user
+        /// </summary>
+        /// <returns>int number of units to buy</returns>
+        public int DisplayGetNumberOfUnitsToBuy()
+        {
+            int numberOfUnitsToAdd = 0;
+
+            ConsoleUtil.HeaderText = "Buy Inventory";
+            ConsoleUtil.DisplayReset();
+
+            ConsoleUtil.DisplayPromptMessage("How many do you want to buy?");
+            numberOfUnitsToAdd = int.Parse(Console.ReadLine());
+
+            return numberOfUnitsToAdd;
         }
 
         #endregion

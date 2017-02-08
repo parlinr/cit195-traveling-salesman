@@ -15,8 +15,17 @@ namespace TheTravelingSalesperson
         private int _accountNumber;
         private List<string> _citiesVisited;
         private string _currentCity;
+        private WidgetItemStock _currentStock;
+        private int _numberOfUnits;
 
-        
+        public int NumberOfUnits
+        {
+            get { return _numberOfUnits; }
+            
+        }
+
+
+
         #endregion
 
         #region PROPERTIES
@@ -41,11 +50,22 @@ namespace TheTravelingSalesperson
             get { return _citiesVisited; }
             set { _citiesVisited = value; }
         }
-        
+
         public string CurrentCity
         {
             get { return _currentCity; }
             set { _currentCity = value; }
+        }
+
+        public WidgetItemStock CurrentStock
+        {
+            get {return _currentStock; }
+            set { _currentStock = value; }
+        }
+
+        public void AddWidgets(int number)
+        {
+            _numberOfUnits += number;
         }
         
 
@@ -59,7 +79,8 @@ namespace TheTravelingSalesperson
 
         public Salesperson()
         {
-            CitiesVisited = new List<string>();
+            _citiesVisited = new List<string>();
+            _currentStock = new WidgetItemStock(); 
         }
 
         #endregion

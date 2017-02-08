@@ -53,10 +53,12 @@ namespace TheTravelingSalesperson
                         _salesperson.CurrentCity = nextCity;
                         break;
                     case MenuOption.Buy:
+                        _salesperson.AddWidgets(_consoleView.DisplayGetNumberOfUnitsToBuy());
                         break;
                     case MenuOption.Sell:
                         break;
                     case MenuOption.DisplayInventory:
+                        _consoleView.DisplayInventory();
                         break;
                     case MenuOption.DisplayCities:
                         _consoleView.DisplayCities();
@@ -65,13 +67,15 @@ namespace TheTravelingSalesperson
                         _consoleView.DisplayAccountInfo();
                         break;
                     case MenuOption.Exit:
+                        _consoleView.DisplayExitPrompt();
+                        _usingApplication = false;
                         break;
                     default:
                         break;
                 }
             }
-            
 
+            Environment.Exit(42);
         }
 
 
