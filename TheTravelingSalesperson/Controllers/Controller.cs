@@ -19,6 +19,8 @@ namespace TheTravelingSalesperson
         #endregion
 
         #region METHODS
+        //TODO enable the passing of the temporary salesperson object and the updating of account info
+
         /// <summary>
         /// Application control method
         /// </summary>
@@ -53,9 +55,10 @@ namespace TheTravelingSalesperson
                         _salesperson.CurrentCity = nextCity;
                         break;
                     case MenuOption.Buy:
-                        _salesperson.AddWidgets(_consoleView.DisplayGetNumberOfUnitsToBuy());
+                        _salesperson.CurrentStock.AddUnits(_consoleView.DisplayGetNumberOfUnitsToBuy());
                         break;
                     case MenuOption.Sell:
+                        _salesperson.CurrentStock.SubtractUnits(_consoleView.DisplayGetNumberOfUnitsToSell());
                         break;
                     case MenuOption.DisplayInventory:
                         _consoleView.DisplayInventory();

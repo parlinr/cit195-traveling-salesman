@@ -15,14 +15,10 @@ namespace TheTravelingSalesperson
         private int _accountNumber;
         private List<string> _citiesVisited;
         private string _currentCity;
-        private WidgetItemStock _currentStock;
-        private int _numberOfUnits;
 
-        public int NumberOfUnits
-        {
-            get { return _numberOfUnits; }
-            
-        }
+        private WidgetItemStock _currentStock;
+
+       
 
 
 
@@ -63,15 +59,14 @@ namespace TheTravelingSalesperson
             set { _currentStock = value; }
         }
 
-        public void AddWidgets(int number)
-        {
-            _numberOfUnits += number;
-        }
         
 
         #endregion
 
         #region METHODS
+
+
+
 
         #endregion
 
@@ -81,6 +76,14 @@ namespace TheTravelingSalesperson
         {
             _citiesVisited = new List<string>();
             _currentStock = new WidgetItemStock(); 
+        }
+
+        public Salesperson(string lastName, string firstName)
+        {
+            _citiesVisited = new List<string>();
+            _currentStock = new WidgetItemStock();
+            _lastName = lastName;
+            _firstName = firstName;
         }
 
         #endregion

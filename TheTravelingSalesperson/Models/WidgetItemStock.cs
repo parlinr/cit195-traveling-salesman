@@ -23,7 +23,7 @@ namespace TheTravelingSalesperson
         #region FIELDS
 
         private WidgetType _type;
-        private int _numberOfUnits;
+        private int _productUnits;
 
         #endregion
 
@@ -36,22 +36,21 @@ namespace TheTravelingSalesperson
             set { _type = value; }
         }
 
-        public int NumberOfUnits
+        public int ProductUnits
         {
-            get { return _numberOfUnits; }
+            get { return _productUnits; }
         }
 
         #endregion
 
         #region METHODS
-
         /// <summary>
         /// add widgets to the inventory
         /// </summary>
         /// <param name="unitsToAdd">number of units to add</param>
-        public void AddWidgets(int unitsToAdd)
+        public void AddUnits(int unitsToAdd)
         {
-            _numberOfUnits += unitsToAdd;
+            _productUnits += unitsToAdd;
         }
 
         // TODO - validate to disable negative stock unit values
@@ -59,9 +58,9 @@ namespace TheTravelingSalesperson
         /// subtract widgets from the inventory
         /// </summary>
         /// <param name="unitsToSubtract">number of units to subtract</param>
-        public void SubtractWidgets(int unitsToSubtract)
+        public void SubtractUnits(int unitsToSubtract)
         {
-            _numberOfUnits -= unitsToSubtract;
+            _productUnits -= unitsToSubtract;
         }
 
         #endregion
@@ -71,13 +70,13 @@ namespace TheTravelingSalesperson
         public WidgetItemStock()
         {
             _type = WidgetType.None;
-            _numberOfUnits = 0;
+            _productUnits = 0;
         }
 
         public WidgetItemStock(WidgetType type, int numberOfUnits)
         {
             _type = type;
-            _numberOfUnits = numberOfUnits;
+            _productUnits = numberOfUnits;
         }
 
         #endregion

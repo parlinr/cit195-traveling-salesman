@@ -18,7 +18,7 @@ namespace TheTravelingSalesperson
         private static int _windowLeft = 20;
         private static int _windowTop = 20;
 
-        private static string _headerText = "- Hello World! -";
+        private static string _headerText = "- Control Panel -";
 
         private static ConsoleColor _headerBackgroundColor = ConsoleColor.White;
         private static ConsoleColor _headerForegroundColor = ConsoleColor.Red;
@@ -26,7 +26,7 @@ namespace TheTravelingSalesperson
         private static ConsoleColor _bodyBackgroundColor = ConsoleColor.Black;
         private static ConsoleColor _bodyForegroundColor = ConsoleColor.White;
 
-        private static string _windowTitle = " - set window title - ";
+        private static string _windowTitle = " - Sales Control Panel - ";
 
         private static int _displayHorizontalMargin = 3;
 

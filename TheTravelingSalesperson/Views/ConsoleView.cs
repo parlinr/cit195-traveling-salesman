@@ -27,13 +27,14 @@ namespace TheTravelingSalesperson
         {
             StringBuilder sb = new StringBuilder();
 
+            ConsoleUtil.HeaderText = "Welcome to your Control Panel";
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayMessage("- add welcome message -");
+            ConsoleUtil.DisplayMessage("Welcome to your Control Panel");
             Console.WriteLine();
 
             sb.Clear();
-            sb.AppendFormat("Your first task will be to set up your account details.");
+            sb.AppendFormat("Your first task will be to set up your account details. ");
             sb.AppendFormat("Good luck with your sales.");
             ConsoleUtil.DisplayMessage(sb.ToString());
 
@@ -65,13 +66,14 @@ namespace TheTravelingSalesperson
         /// </summary>
         public void DisplaySetupAccount()
         {
+            //TODO Validate initial input
             ConsoleUtil.HeaderText = "Account Setup";
             ConsoleUtil.DisplayReset();
 
             ConsoleUtil.DisplayMessage("Setup your account now.");
             Console.WriteLine();
 
-            ConsoleUtil.DisplayPromptMessage("Enter your first name: ");
+            ConsoleUtil.DisplayPromptMessage("Enter your first name:  ");
             _salesperson.FirstName = Console.ReadLine();
             Console.WriteLine();
 
@@ -89,13 +91,10 @@ namespace TheTravelingSalesperson
             Console.WriteLine();
 
             ConsoleUtil.DisplayPromptMessage("Enter the number of widgets: ");
-            _salesperson.AddWidgets(int.Parse(Console.ReadLine()));
+            _salesperson.CurrentStock.AddUnits(int.Parse(Console.ReadLine()));
             Console.WriteLine();
 
-            //
-            // TODO prompt the user to input all of the required account information
-            //
-
+            
             DisplayContinuePrompt();
         }
 
@@ -107,14 +106,13 @@ namespace TheTravelingSalesperson
             MenuOption userMenuChoice = MenuOption.None;
             bool usingMenu = true;
 
-            //
-            // TODO enable each application function separately and test
-            //
+            
             while (usingMenu)
             {
                 //
                 // set up display area
                 //
+                ConsoleUtil.HeaderText = "Main Menu";
                 ConsoleUtil.DisplayReset();
                 Console.CursorVisible = false;
 
@@ -124,7 +122,8 @@ namespace TheTravelingSalesperson
                 ConsoleUtil.DisplayMessage("Please type the number of your menu choice.");
                 Console.WriteLine();
                 Console.WriteLine(
-                     "\t" + "2. Add Widgets" + Environment.NewLine +
+                    "\t" + "1. Buy Widgets" + Environment.NewLine +
+                     "\t" + "2. Sell Widgets" + Environment.NewLine +
                     "\t" + "3. Display Inventory" + Environment.NewLine +
                     "\t" + "4. Display Cities Visited and Current City" + Environment.NewLine +
                     "\t" + "5. Travel" + Environment.NewLine + 
@@ -138,8 +137,12 @@ namespace TheTravelingSalesperson
                 ConsoleKeyInfo userResponse = Console.ReadKey(true);
                 switch (userResponse.KeyChar)
                 {
-                    case '2':
+                    case '1':
                         userMenuChoice = MenuOption.Buy;
+                        usingMenu = false;
+                        break;
+                    case '2':
+                        userMenuChoice = MenuOption.Sell;
                         usingMenu = false;
                         break;
                     case '3':
@@ -197,19 +200,25 @@ namespace TheTravelingSalesperson
         /// <returns>string City</returns>
         public string DisplayGetNextCity()
         {
+            ConsoleUtil.HeaderText = "Travel";
+            ConsoleUtil.DisplayReset();
+
             string nextCity = "";
             
 
-            ConsoleUtil.DisplayMessage("Next City of Travel: ");
+            ConsoleUtil.DisplayPromptMessage("Next City of Travel: ");
             nextCity = Console.ReadLine();
-            ConsoleUtil.DisplayReset();
             DisplayContinuePrompt();
             return nextCity;
         }
 
         public void DisplayCities()
         {
+            ConsoleUtil.HeaderText = "Current City and Cities Visited";
+            ConsoleUtil.DisplayReset();
+
             ConsoleUtil.DisplayMessage($"Current City: {_salesperson.CurrentCity}");
+            Console.WriteLine();
 
             ConsoleUtil.DisplayMessage($"List of cities visited:");
             foreach (string city in _salesperson.CitiesVisited)
@@ -226,6 +235,7 @@ namespace TheTravelingSalesperson
         /// </summary>
         public void DisplayExitPrompt()
         {
+            ConsoleUtil.HeaderText = "Exit";
             ConsoleUtil.DisplayReset();
 
             Console.CursorVisible = false;
@@ -242,9 +252,14 @@ namespace TheTravelingSalesperson
         /// </summary>
         public void DisplayInventory()
         {
+            ConsoleUtil.HeaderText = "Inventory";
             ConsoleUtil.DisplayReset();
-            ConsoleUtil.DisplayMessage($"Widget type: {_salesperson.CurrentStock}");
-            ConsoleUtil.DisplayMessage($"Widget type: {_salesperson.NumberOfUnits}");
+            
+
+            ConsoleUtil.DisplayMessage($"Widget type: {Enum.GetName(typeof(WidgetItemStock.WidgetType), _salesperson.CurrentStock.Type)}");
+
+
+            ConsoleUtil.DisplayMessage($"Number of units: {_salesperson.CurrentStock.ProductUnits}");
             DisplayContinuePrompt();
         }
 
@@ -254,15 +269,83 @@ namespace TheTravelingSalesperson
         /// <returns>int number of units to buy</returns>
         public int DisplayGetNumberOfUnitsToBuy()
         {
-            int numberOfUnitsToAdd = 0;
+           int numberOfUnitsToAdd = 0;
 
             ConsoleUtil.HeaderText = "Buy Inventory";
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayPromptMessage("How many do you want to buy?");
-            numberOfUnitsToAdd = int.Parse(Console.ReadLine());
+            
+            try
+            {
+                ConsoleUtil.DisplayPromptMessage("How many do you want to buy? ");
+                numberOfUnitsToAdd = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                ConsoleUtil.DisplayMessage("You did not enter an integer.");
+            }
+            catch (OverflowException)
+            {
+                ConsoleUtil.DisplayMessage("Your integer was too large.");
+            }
+            catch (Exception)
+            {
+                ConsoleUtil.DisplayMessage("An error occurred.");
+            }
+
+
+            ConsoleUtil.DisplayPromptMessage($"{numberOfUnitsToAdd} units successfully purchased.");
+            DisplayContinuePrompt();
 
             return numberOfUnitsToAdd;
+        }
+
+        /// <summary>
+        /// get the number of widget units to sell from the user
+        /// </summary>
+        /// <returns></returns>
+        public int DisplayGetNumberOfUnitsToSell()
+        {
+            int numberOfUnitsToSell = 0;
+
+            ConsoleUtil.HeaderText = "Sell Inventory";
+            ConsoleUtil.DisplayReset();
+
+            
+            try
+            {
+                ConsoleUtil.DisplayPromptMessage("How many do you want to sell? ");
+                numberOfUnitsToSell = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                ConsoleUtil.DisplayMessage("You did not enter an integer.");
+            }
+            catch (OverflowException)
+            {
+                ConsoleUtil.DisplayMessage("Your integer was too large.");
+            }
+            catch (Exception)
+            {
+                ConsoleUtil.DisplayMessage("An error occurred.");
+            }
+
+            if (_salesperson.CurrentStock.ProductUnits - numberOfUnitsToSell < 0)
+            {
+                ConsoleUtil.DisplayMessage("You cannot sell more units than you have in inventory.");
+                numberOfUnitsToSell = 0;
+                DisplayContinuePrompt();
+
+            }
+            else
+            {
+                ConsoleUtil.DisplayPromptMessage($"{numberOfUnitsToSell} units successfully sold.");
+                DisplayContinuePrompt();
+            }
+
+            
+
+            return numberOfUnitsToSell;
         }
 
         #endregion
