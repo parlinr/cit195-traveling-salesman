@@ -53,7 +53,7 @@ namespace TheTravelingSalesperson
             _productUnits += unitsToAdd;
         }
 
-        // TODO - validate to disable negative stock unit values
+        
         /// <summary>
         /// subtract widgets from the inventory
         /// </summary>
